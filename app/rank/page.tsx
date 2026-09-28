@@ -19,7 +19,7 @@ function HeartIcon() {
     </svg>
   );
 }
-
+// Modal para mostrar el post con más likes
 function Modal({
   post,
   onClose,

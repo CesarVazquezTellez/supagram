@@ -44,8 +44,8 @@ function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) 
       <div className="flex items-center gap-3 p-4">
         <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary">
           <Image
-            src={post.user?.avatar || "https://jutnoyqfheakkwlxpkrp.supabase.co/storage/v1/object/public/supagram/profiles/0d0a1dbafc0b9faea24068a53108eb48.jpg"}
-            alt={post.user?.username || "Avatar de usuario"}
+            src={post.user?.avatar || 'https://towvnjmieprruexvhadc.supabase.co/storage/v1/object/public/supagram/profiles/ryo.jpg'}
+            alt={post.user?.username || 'default user'}
             fill
             className="object-cover"
           />
@@ -60,7 +60,7 @@ function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) 
       <div className="relative w-full aspect-square">
         <Image
           src={post.image_url}
-          alt={`Post de ${post.user.username}`}
+          alt={`Post de ${post.user?.username || 'default user'}`}
           fill
           className="object-cover"
         />
@@ -84,7 +84,7 @@ function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) 
 
         {/* Caption */}
         <p className="mt-2 text-foreground">
-          <span className="font-semibold">{post.user.username}</span>{" "}
+          <span className="font-semibold">{post.user?.username || 'default user'}</span>{" "}
           <span className="text-foreground/80">{post.caption}</span>
         </p>
       </div>
@@ -93,25 +93,25 @@ function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) 
 }
 
 export default function Home() {
-  
+
     useEffect(() => {
       async function getPosts() {
         const { data: posts } = await supabase
         .from('posts')
         .select('*')
         //.gte('likes', 50)
-        .order('likes', { ascending: false })
+        .order('created_at', { ascending: false })
         .range(0, 11)
-  
+        
         if (posts) {
           setPosts(posts)
           console.log(posts)
         }
       }
-  
+      
       getPosts()
-  }, [])
-  
+    }, [])
+
   const [posts, setPosts] = useState<Post[]>(initialPosts);
 
   const handleLike = (postId: number | string) => {
@@ -134,7 +134,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-card-bg border-b border-border">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-center">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Supagram 👽
+            Instagram
           </h1>
         </div>
       </header>

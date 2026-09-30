@@ -71,7 +71,7 @@ export default function RankPage() {
               />
               {/* Overlay con likes al hover */}
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1">
-                <HeartIcon filled={true} />
+                <HeartIcon />
                 <span className="text-white font-semibold">
                   {post.likes.toLocaleString()}
                 </span>
